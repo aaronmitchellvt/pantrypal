@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { ref } from "@vue/reactivity";
+import { registerWithEmail } from "../composables/useAuth"
 const firstName: Ref<string> = ref('');
 const lastName: Ref<string> = ref('');
 const email: Ref<string> = ref('');
 const password: Ref<string> = ref('');
 const confirmPassword: Ref<string> = ref('');
+
+const handleRegisterSubmit = async function () {
+  await registerWithEmail(firstName.value, lastName.value, email.value, password.value);
+}
 </script>
 
 <template>
@@ -26,7 +32,9 @@ const confirmPassword: Ref<string> = ref('');
       <label for="confirmPassword">Confirm Password</label>
       <input v-model="confirmPassword" id="confirmPassword" name="confirmPassword" type="password" required />
 
-      <button type="submit">Register</button>
     </form>
+
+    <button @click.prevent="handleRegisterSubmit">Register</button>
+
   </div>
 </template>

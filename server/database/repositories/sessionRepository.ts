@@ -16,7 +16,7 @@ export async function createSession(sessionData: ISession): Promise<ISession> {
 }
 
 export async function getSessionByAuthToken(authToken: string) {
-  const user: IUser = await getUserByAuthToken(authToken) as unknown as IUser;
+  const user: IUser = await getUserByAuthToken(authToken) as any as IUser;
   return { authToken, user }
 }
 

@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import { IUser } from '~~/types/IUser';
 import { doesUserExist } from '~~/server/services/userService';
 import { createUser } from '~~/server/database/repositories/userRepository';
+import { makeSession } from '~~/server/services/sessionService';
 
 export default eventHandler(async (event: H3Event) => {
   const { firstName, lastName, email, password } = await readBody(event);
@@ -17,13 +18,12 @@ export default eventHandler(async (event: H3Event) => {
   console.log("encrypted pass: ", encryptedPassword);
 
   const userData: IUser = {
-    firstName,
-    lastName,
-    email,
-    password
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password
   }
 
   const user = await createUser(userData);
-  return user;
-  // return await makeSession(user, event);
+  return await makeSession(user, event);
 })

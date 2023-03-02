@@ -9,10 +9,17 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.4.1",
+    "@types/bcrypt": "^5.0.0",
     "nuxt": "^3.2.2"
   },
   "dependencies": {
+    "@prisma/client": "^4.11.0",
+    "bcrypt": "^5.1.0",
     "h3": "^1.5.0",
+    "prisma": "^4.11.0",
     "vue-router": "^4.1.6"
+  },
+  "prisma": {
+    "schema": "server/database/schema.prisma"
   }
 }

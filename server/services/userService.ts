@@ -1,3 +1,5 @@
+import { User } from "@prisma/client";
+import { IUser } from "~~/types/IUser";
 import { getUserByEmail } from "../database/repositories/userRepository";
 
 type ExistsCheck = {
@@ -23,4 +25,11 @@ export async function doesUserExist(email: string): Promise<ExistsCheck> {
   }
 
   return { value: false }
+}
+
+export function sanitizeUserForFrontend(user: IUser | undefined): IUser | undefined {
+  if (user) {
+    delete user.password;
+  }
+  return user;
 }

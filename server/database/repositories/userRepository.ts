@@ -8,7 +8,8 @@ export async function getUserByEmail(email: string) {
     },
     select: {
       id: true,
-      firstName: true
+      firstName: true,
+      password: true
     },
   })
   return user;
